@@ -97,7 +97,7 @@ public class Calculator extends JFrame{
     }
 
     // infixata la postfixata
-    private String postfix(String expression){
+    public String postfix(String expression){
         StringBuilder rez=new StringBuilder();
         Stack<Character> stack=new Stack<>();
         for (int i=0;i<expression.length();i++)
@@ -136,7 +136,7 @@ public class Calculator extends JFrame{
         return rez.toString();
     }
 
-    private double f(String expression){
+    public double f(String expression){
         Stack<Double> stack=new Stack<>();
         String[] tokens=expression.split(" ");
         
@@ -168,11 +168,11 @@ public class Calculator extends JFrame{
         return stack.pop();
     }
 
-    private boolean isOperator(char c){
+    public boolean isOperator(char c){
         return c=='+' || c=='-' || c=='*' || c=='/';
     }
 
-    private int prioritate(char c){
+    public int prioritate(char c){
         switch (c){
             case '+':
             case '-':
