@@ -21,6 +21,13 @@ class Polyglot {
         return resultString;
     }
 
+    private static void afisare(Value v){
+        for(int i=0;i<v.getArraySize();i++) {
+            System.out.println(v.getArrayElement(i));
+            System.out.println('\n');
+        }
+    }
+
     //metoda privata pentru evaluarea unei sume de control simple a literelor unui text ASCII, folosind PYTHON
     private static int SumCRC(String token){
         //construim un context care ne permite sa folosim elemente din PYTHON
@@ -36,13 +43,12 @@ class Polyglot {
         return resultInt;
     }
 
-    private static int NumRND(){
+    private static Value NumRND(){
         Context polyglot = Context.newBuilder().allowAllAccess(true).build();
         polyglot.eval("python", "import random\n" + "v=[random.randint(1,100) for i in range(20)]");
         Value result= polyglot.eval("python", "v");
 
-        System.out.println(result);
-        return 0;
+        return result;
     }
 
     //functia MAIN
@@ -59,8 +65,9 @@ class Polyglot {
             int crc = SumCRC(upper);
             System.out.println(upper + " -> " + crc);
         }
-        int res= NumRND();
+        Value res= NumRND();
         System.out.println(res);
+        afisare(res);
         // inchidem contextul Polyglot
         polyglot.close();
     }
