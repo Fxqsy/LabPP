@@ -56,18 +56,32 @@ class Polyglot {
         //construim un context pentru evaluare elemente JS
         Context polyglot = Context.create();
         //construim un array de string-uri, folosind cuvinte din pagina web:  https://chrisseaton.com/truffleruby/tenthings/
-        Value array = polyglot.eval("js", "[\"Iaaf\",\"waabv\"];");
+        Value array = polyglot.eval("js", "[\"If\",\"we\",\"run\"]");
         //pentru fiecare cuvant, convertim la upcase folosind R si calculam suma de control folosind PYTHON
+        List<String> cuvinte =new ArrayList<>();
+        List<Integer> sume_de_cntrl= new ArrayList<>();
         for (int i = 0; i < array.getArraySize();i++){
             String element = array.getArrayElement(i).asString();
-            element =element.substring(1,element.length()-1);
             String upper = RToUpper(element);
             int crc = SumCRC(upper);
-            System.out.println(upper + " -> " + crc);
+            cuvinte.add(element);
+            sume_de_cntrl.add(crc);
         }
-        Value res= NumRND();
-        System.out.println(res);
-        afisare(res);
+
+        for(int i=0;i<sume_de_cntrl.size();i++)
+        {
+            if(cuvinte.get(i)!=null) {
+                int crc = sume_de_cntrl.get(i);
+                System.out.printf(sume_de_cntrl.get(i)+ ": "+cuvinte.get(i) + " ");
+                for (int j = i + 1; j < sume_de_cntrl.size(); j++) {
+                    if (sume_de_cntrl.get(j) == crc) {
+                        System.out.printf(cuvinte.get(j) + " ");
+                        cuvinte.set(j, null);
+                    }
+                }
+                System.out.println();
+            }
+        }
         // inchidem contextul Polyglot
         polyglot.close();
     }
