@@ -38,7 +38,6 @@ class Polyglot {
     public static void main(String[] args) {
         //construim un context pentru evaluare elemente JS
         Context polyglot = Context.create();
-        //construim un array de string-uri, folosind cuvinte din pagina web:  https://chrisseaton.com/truffleruby/tenthings/
         Value array = polyglot.eval("js", "[\"If\",\"we\",\"run\",\"gun\"]");
         //pentru fiecare cuvant, convertim la upcase folosind R si calculam suma de control folosind PYTHON
         List<String> cuvinte =new ArrayList<>();
